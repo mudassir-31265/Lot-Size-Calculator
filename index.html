@@ -9,7 +9,12 @@
 <body>
     <div class="container">
         <h1>Lot Size Calculator</h1>
-        
+
+        <!-- ✅ TradingView Ticker Tape Widget -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+        </div>
+
         <label for="accountBalance">Account Balance ($):</label>
         <input type="number" id="accountBalance" placeholder="Enter account balance">
 
@@ -20,6 +25,9 @@
         <select id="instrument">
             <option value="BTCUSD">BTC/USD</option>
             <option value="XAUUSD">XAU/USD (Gold)</option>
+            <option value="EURUSD">EUR/USD</option>
+            <option value="ETHUSD">ETH/USD</option>
+            <option value="SOLUSD">SOL/USD</option>
         </select>
 
         <label for="entryPrice">Entry Price:</label>
@@ -32,6 +40,30 @@
 
         <h2 id="result">Lot Size: --</h2>
     </div>
+
+    <!-- ✅ TradingView Script (Now Loaded Separately) -->
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            let script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
+            script.async = true;
+            script.innerHTML = `{
+                "symbols": [
+                    { "proName": "BINANCE:BTCUSDT", "title": "Bitcoin (BTC/USD)" },
+                    { "proName": "OANDA:XAUUSD", "title": "Gold (XAU/USD)" },
+                    { "proName": "FX_IDC:EURUSD", "title": "Euro (EUR/USD)" },
+                    { "proName": "BINANCE:ETHUSDT", "title": "Ethereum (ETH/USD)" },
+                    { "proName": "BINANCE:SOLUSDT", "title": "Solana (SOL/USD)" }
+                ],
+                "colorTheme": "dark",
+                "isTransparent": false,
+                "displayMode": "adaptive",
+                "locale": "en"
+            }`;
+            document.querySelector(".tradingview-widget-container").appendChild(script);
+        });
+    </script>
 
     <script src="script.js"></script>
 </body>

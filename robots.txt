@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mudassir-31265.github.io/Lot-Size-Calculator/sitemap.xml
